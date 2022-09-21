@@ -38,6 +38,15 @@ defmodule WorkOS.Api do
   end
 
   @doc """
+  Performs a PUT request
+  """
+  def put(path, params \\ "", opts \\ []) do
+    client(opts)
+    |> Tesla.put(path, params)
+    |> handle_response
+  end
+
+  @doc """
   Performs a DELETE request
   """
   def delete(path, params \\ "", opts \\ []) do

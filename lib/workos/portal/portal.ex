@@ -34,6 +34,32 @@ defmodule WorkOS.Portal do
     do: raise(ArgumentError, message: "need both domains and name in params")
 
   @doc """
+  Update an organization
+
+  ### Parameters
+  - organization_id
+  - params (map)
+    - domains (list of strings) List of domains that belong to the organization
+    - name (string) A unique, descriptive name for the organization
+
+  ### Example
+  WorkOS.Portal.update_organization("org_01GD137PNGRVWX3XXMVRHPKKWD", %{
+    domains: ["workos.com"],
+    name: "WorkOS"
+  })
+  """
+  def update_organization(organization, params, opts \\ [])
+
+  def update_organization(organization, params, opts)
+      when is_map_key(params, :domains) and is_map_key(params, :name) do
+    query = Api.process_params(params, [:domains, :name])
+    Api.put("/organizations/#{organization}", query, opts)
+  end
+
+  def update_organization(_organization, _params, _opts),
+    do: raise(ArgumentError, message: "need both domains and name in params")
+
+  @doc """
   Delete an organization
 
   ### Parameters
