@@ -27,7 +27,8 @@ defmodule WorkOS.MixProject do
   defp deps do
     [
       {:tesla, "~> 1.4"},
-      {:hackney, "~> 1.18.0"},
+      # Only used by the default Tesla adapter. Set `config :workos, adapter: ...` to run without it.
+      {:hackney, "~> 1.18 or ~> 4.0", optional: true},
       {:jason, ">= 1.0.0"},
       {:ex_doc, "~> 0.23", only: :dev, runtime: false}
     ]
